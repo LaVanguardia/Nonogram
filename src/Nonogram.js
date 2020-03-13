@@ -51,13 +51,15 @@ function Nonogram() {
     // generateRandomSolution()
 
     return (
-        <div className="game container-fluid" >
-            {solutionGame.grid.map(e =>
-                <div className="row">
-                    <div className="col-2">{e}</div>
-                </div>
-            )}
-        </div>
+        <table>
+            {
+                solutionGame.grid.map((row, index) => (
+                    <tr key={row[0]}>
+                        {row.map(cellId => <th key={cellId}>{cellId}</th>)}
+                    </tr>
+                ))
+            }
+        </table>
     )
 
 }
