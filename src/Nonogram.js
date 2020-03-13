@@ -42,18 +42,14 @@ function Nonogram() {
     // }
 
     let generateRandomSolution = () => {
-        changeSolutionGame(
-            solutionGame.grid.map(row =>
-                row.map(item => (Math.round(Math.random())))
-            )
-        )
+        console.log(solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
     }
-    // generateRandomSolution()
+    generateRandomSolution()
 
     return (
         <table>
             {
-                solutionGame.grid.map((row, index) => (
+                solutionUser.grid.map((row, index) => (
                     <tr key={row[0]}>
                         {row.map(cellId => <th key={cellId}>{cellId}</th>)}
                     </tr>
