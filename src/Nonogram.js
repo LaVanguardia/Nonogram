@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Nonogram.scss';
 import { render } from '@testing-library/react';
 
@@ -40,14 +40,14 @@ function Nonogram() {
     // componentDidMount () {
     //     generateRandomSolution()
     // }
-
-    let generateRandomSolution = () => {
-        return (solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
-    }
+    useEffect(()=>{changeSolutionGame(solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))},[])
+    // let generateRandomSolution = () => {
+    //     return (solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
+    // }
 
     return (
         <div>
-            {generateRandomSolution()}
+            {/* {generateRandomSolution()} */}
             <table>
                 {
                     solutionUser.grid.map((row, index) => (
