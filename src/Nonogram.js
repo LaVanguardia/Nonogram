@@ -42,8 +42,8 @@ function Nonogram() {
     // }
 
     let generateRandomSolution = () => {
-        changeSolutionUser(
-            solutionUser.grid.map(row =>
+        changeSolutionGame(
+            solutionGame.grid.map(row =>
                 row.map(item => (Math.round(Math.random())))
             )
         )
@@ -52,7 +52,7 @@ function Nonogram() {
 
     return (
         <div className="game container-fluid" >
-            {solutionUser.grid.map(e =>
+            {solutionGame.grid.map(e =>
                 <div className="row">
                     <div className="col-2">{e}</div>
                 </div>
