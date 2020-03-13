@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './Nonogram.scss';
+import { render } from '@testing-library/react';
 
-class Nonogram extends Component {
+function Nonogram() {
 
-    state = {
+    // ---STATES---
+    const [newGame, changeNewGame] = useState({
         // We create a new grid here of 5x5
         grid: [
             [0, 0, 0, 0, 0],
@@ -12,37 +14,52 @@ class Nonogram extends Component {
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0]
         ]
-    }
+    })
+    const [solutionGame, changeSolutionGame] = useState({
+        // Here will be the solution (0 and 1) generate randomly
+        grid: [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ]
+    })
+    const [solutionUser, changeSolutionUser] = useState({
+        // Here will be the solution (0 and 1) of the user. We compare it with the solutionGame to see if its ok or not
+        grid: [
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0]
+        ]
+    })
+    // ---END OF STATES---
 
-    createNewGame = () => {
-        // first we calculate how many numbers are we going to have per row
-        let numbersToPlay = this.state.grid[0].length;
+    // componentDidMount () {
+    //     generateRandomSolution()
+    // }
 
-        let verticalClues = [];
-        let horizontalClues = [];
-
-        // To calculate the vertical clues, we use a random number
-        for (let i = 0; i < numbersToPlay; i++) {
-            verticalClues.push(Math.floor(Math.random() * numbersToPlay));
-        }
-        console.log(verticalClues);
-       
-        // Esto lo he visto en internet Javi, puede estar muy chulo para iterar en cada row y dentro de cada row, en cada item...
-        //     let newPuzzle = () => {
-        //     puzzleGrid.map(row =>
-        //         row.map(item => (Math.floor(Math.random() * 3) === 0 ? 0 : 1))
-        //     )
-        // };
-    }
-
-    render() {
-        return (
-            <div className="game container-fluid" >
-                <p>{this.numbersToPlay}</p>
-                {this.createNewGame()}
-            </div>
+    let generateRandomSolution = () => {
+        changeNewGame(
+            solutionUser.grid.map(row =>
+                row.map(item => (Math.round(Math.random())))
+            )
         )
     }
+    // generateRandomSolution()
+
+    return (
+        <div className="game container-fluid" >
+            {solutionUser.grid.map(e =>
+                <div className="row">
+                    <div className="col-2">{e}</div>
+                </div>
+            )}
+        </div>
+    )
+
 }
 
 export default Nonogram;
