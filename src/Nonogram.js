@@ -6,7 +6,7 @@ function Nonogram() {
 
     // ---STATES---
     const [newGame, changeNewGame] = useState({
-        // We create a new grid here of 5x5
+        // We create a new grid of 5x5
         grid: [
             [0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0],
@@ -42,7 +42,7 @@ function Nonogram() {
     // }
 
     let generateRandomSolution = () => {
-        changeNewGame(
+        changeSolutionUser(
             solutionUser.grid.map(row =>
                 row.map(item => (Math.round(Math.random())))
             )
