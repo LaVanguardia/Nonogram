@@ -42,20 +42,23 @@ function Nonogram() {
     // }
 
     let generateRandomSolution = () => {
-        console.log(solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
+        return (solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
     }
-    generateRandomSolution()
 
     return (
-        <table>
-            {
-                solutionUser.grid.map((row, index) => (
-                    <tr key={row[0]}>
-                        {row.map(cellId => <th key={cellId}>{cellId}</th>)}
-                    </tr>
-                ))
-            }
-        </table>
+        <div>
+            {generateRandomSolution()}
+            <table>
+                {
+                    solutionUser.grid.map((row, index) => (
+                        <tr key={row[0]}>
+                            {row.map(cellId => <th key={cellId}>{cellId}</th>)}
+                        </tr>
+                    ))
+                }
+            </table>
+        </div>
+
     )
 
 }
