@@ -37,30 +37,29 @@ function Nonogram() {
     })
     // ---END OF STATES---
 
-    // componentDidMount () {
-    //     generateRandomSolution()
-    // }
-    useEffect(()=>{changeSolutionGame(solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))},[])
-    // let generateRandomSolution = () => {
-    //     return (solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))))
-    // }
+    let changeCellValue = (x,y) => {
+        let objeto = {...solutionUser};
+        objeto.grid[x][y] = !objeto.grid[x][y];
+        changeSolutionUser(objeto);
+    }
+
+    // We change the value of SolutionGame, making random values 1 or
+    useEffect(() => { changeSolutionGame(solutionGame.grid.map(row => row.map(item => item = (!!Math.round(Math.random()))))) }, [])
+    console.log({ solutionGame })
 
     return (
-        <div>
-            {/* {generateRandomSolution()} */}
-            <table>
+        <table className="center">
+            <tbody>
                 {
-                    solutionUser.grid.map((row, index) => (
-                        <tr key={row[0]}>
-                            {row.map(cellId => <th key={cellId}>{cellId}</th>)}
+                    solutionUser.grid.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                            {row.map((cell, cellIndex) => <td className="cell" key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} >{cell? 'X' : 'O'}</td>)}
                         </tr>
                     ))
                 }
-            </table>
-        </div>
-
+            </tbody>
+        </table>
     )
-
 }
 
 export default Nonogram;

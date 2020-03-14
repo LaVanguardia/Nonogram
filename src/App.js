@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <Nonogram/>
-      <Button color="danger">Danger!</Button>
+      <Button color="primary">Play!</Button>
     </div>
   );
 }
