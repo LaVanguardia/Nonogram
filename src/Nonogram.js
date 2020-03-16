@@ -50,9 +50,19 @@ function Nonogram() {
     return (
         <table className="center">
             <tbody>
+                <tr>
+                    {/* El primero va vacio */}
+                    <td></td>
+                    <td>pista</td>
+                    <td>pista</td>
+                    <td>pista</td>
+                    <td>pista</td>
+                    <td>pista</td>
+                </tr>
                 {
                     solutionUser.grid.map((row, rowIndex) => (
                         <tr key={rowIndex}>
+                            <td>pista</td>
                             {row.map((cell, cellIndex) => <td className="cell" key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} >{cell? 'X' : 'O'}</td>)}
                         </tr>
                     ))
