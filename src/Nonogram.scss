@@ -1,10 +1,24 @@
-
- table.center {
-     margin-left: auto;
-     margin-right: auto;
-    & .cell {
+table.center {
+    margin-left: auto;
+    margin-right: auto;
+    empty-cells: hide;
+    // Cases of the cells...No selected:0 /OK:1 / KO:2 
+    & .cell_0{
+        background-color: white;
         width: 2rem;
         height: 2rem;
         border: 1px solid black;
     }
- }
+    & .cell_1 {
+        background-color: green;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid black;
+    }
+    & .cell_2 {
+        background-color: red;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid black;
+    }
+}
