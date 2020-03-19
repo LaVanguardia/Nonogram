@@ -27,7 +27,7 @@ table.center {
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 2px;
-    text-align: center;
+    text-align: right;
 }
 
 .v_clue {
@@ -37,6 +37,14 @@ table.center {
     -moz-transform: rotate(-90deg);
     -o-transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
+    text-align: left;
+    
+}
+
+.h_clue {
+    letter-spacing: 4px;
+    padding-right: 4px;
+
     
 }
 
