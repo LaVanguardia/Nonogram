@@ -3,7 +3,7 @@ table.center {
     margin-right: auto;
     empty-cells: hide;
     // Cases of the cells...No selected:0 /OK:1 / KO:2 
-    & .cell_0{
+    & .cell_0 {
         background-color: white;
         width: 2rem;
         height: 2rem;
@@ -22,3 +22,22 @@ table.center {
         border: 1px solid black;
     }
 }
+
+.clue {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.v_clue {
+    letter-spacing: 4px;
+    padding-left: 10px;
+    transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    
+}
+
+

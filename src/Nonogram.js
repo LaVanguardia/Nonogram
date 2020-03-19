@@ -185,16 +185,15 @@ function Nonogram() {
                 <tr>
                     {/*The first one goes empty*/}
                     <td></td>
-                    <td>pista</td>
-                    <td>pista</td>
-                    <td>pista</td>
-                    <td>pista</td>
-                    <td>pista</td>
+                    {verticalClues.map((clue,clueIndex)=>{
+                        return <td key={clueIndex} className='clue v_clue'>{clue}</td>
+                    })}
+                    
                 </tr>
                 {
                     solutionUser.grid.map((row, rowIndex) => (
                         <tr key={rowIndex}>
-                            <td>pista</td>
+                            <td className='clue h_clue'>{horizontalClues[rowIndex]}</td>
                             {row.map((cell, cellIndex) => <td className={`cell_${cell}`} key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} >{cell}</td>)}
                         </tr>
                     ))
