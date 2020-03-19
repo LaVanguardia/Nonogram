@@ -119,7 +119,7 @@ function Nonogram() {
     }
     //We call the function with the randomly generated array as argument to calculate the horizontal clues
     horizontalCounter(solutionGame.grid);
-    console.log(horizontalClues);
+    // console.log(horizontalClues);
 
     function verticalCounter(grid) {
         let values = [];
@@ -137,8 +137,8 @@ function Nonogram() {
       
             tempVerticalGrid.push(grid[j][i])
           }
-          verticalGrid.push(tempVerticalGrid);
-          tempVerticalGrid=[];
+        verticalGrid.push(tempVerticalGrid);
+        tempVerticalGrid=[];
         }
       
       //We divide the vertical array into two arrays of values and times that are repeated (same routine)
@@ -149,15 +149,14 @@ function Nonogram() {
               tempArrayTimes.push(1);
             } else {
               tempArrayTimes[tempArrayTimes.length-1]++;
-            }
+                }
             prev = verticalGrid[i][j];
           }
-          values.push(tempArrayValues);
-          times.push(tempArrayTimes);
-          tempArrayValues = [];
-          tempArrayTimes = [];
-          prev = null;
-      
+        values.push(tempArrayValues);
+        times.push(tempArrayTimes);
+        tempArrayValues = [];
+        tempArrayTimes = [];
+        prev = null;
         }
       
         //We select only the values of 1 (which are the clues to be displayed) and store them in verticalClues
@@ -176,7 +175,7 @@ function Nonogram() {
       
       //We call the function with the randomly generated array as argument to calculate the vertical clues
       verticalCounter(solutionGame.grid);
-      console.log(verticalClues);
+    //   console.log(verticalClues);
  
 
     return (
