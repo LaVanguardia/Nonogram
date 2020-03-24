@@ -178,7 +178,7 @@ function Nonogram() {
               Has ganado el juego! ¿Quieres intentar otra partida?
         </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={toggle}>Vamos allá</Button>{' '}
+              <Button color="primary" onClick={()=>window.location.reload()}>Vamos allá</Button>{' '}
             </ModalFooter>
           </Modal>
         </div>
@@ -190,7 +190,7 @@ function Nonogram() {
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue'>{clue}</td>
+                  return <td key={clueIndex} className='clue v_clue prueba'>{clue}</td>
                 })}
               </tr>
               {

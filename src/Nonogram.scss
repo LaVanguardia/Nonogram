@@ -6,6 +6,7 @@ table.center {
         text-align: center;
         width: 60px;
         height: 60px;
+         
     }
 
     // Cases of the cells...No selected:0 /OK:1 / KO:2 
@@ -41,17 +42,20 @@ table.center {
 .v_clue {
     letter-spacing: 4px;
     padding-left: 10px;
-    transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    text-align: left;
-
+    -webkit-writing-mode: vertical-lr;
+    -ms-writing-mode: tb-lr;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    -webkit-font-feature-settings: "vkrn",
+    "vpal";
+    font-feature-settings: "vkrn",
+    "vpal";
 }
 
 .h_clue {
     letter-spacing: 4px;
     padding-right: 4px;
-
-
+}
+.prueba{
+    display: inline-table;
 }
