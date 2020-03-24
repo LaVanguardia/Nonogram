@@ -1,7 +1,13 @@
 table.center {
-    margin-left: auto;
-    margin-right: auto;
     empty-cells: hide;
+
+    & td {
+        padding: 15px;
+        text-align: center;
+        width: 60px;
+        height: 60px;
+    }
+
     // Cases of the cells...No selected:0 /OK:1 / KO:2 
     & .cell_0 {
         background-color: white;
@@ -9,12 +15,14 @@ table.center {
         height: 2rem;
         border: 1px solid black;
     }
+
     & .cell_1 {
         background-color: green;
         width: 2rem;
         height: 2rem;
         border: 1px solid black;
     }
+
     & .cell_2 {
         background-color: red;
         width: 2rem;
@@ -38,14 +46,12 @@ table.center {
     -o-transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     text-align: left;
-    
+
 }
 
 .h_clue {
     letter-spacing: 4px;
     padding-right: 4px;
 
-    
+
 }
-
-

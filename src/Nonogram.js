@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Nonogram.scss';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 function Nonogram() {
 
@@ -13,7 +14,7 @@ function Nonogram() {
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0]
     ]
-  })
+  });
   const [solutionGame, changeSolutionGame] = useState({
     // Here will be the solution (0 and 1) generate randomly
     grid: [
@@ -23,7 +24,7 @@ function Nonogram() {
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0]
     ]
-  })
+  });
   const [solutionUser, changeSolutionUser] = useState({
     // Here will be the solution (0 and 1) of the user. We compare it with the solutionGame to see if its ok or not
     grid: [
@@ -33,12 +34,18 @@ function Nonogram() {
       [0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0]
     ]
-  })
-  const [winGame, changeWinGame] = useState(false)
+  });
+  const [winGame, changeWinGame] = useState(false);
   // ---END OF STATES---
 
-  // We change the value of SolutionGame, making random values 0/1
+  //--MODAL fin del juego
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+  //--FIN MODAL
+
+  //We change the value of SolutionGame, making random values 0 / 1
   useEffect(() => { changeSolutionGame({ grid: solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))) }) }, []);
+  console.log(solutionGame)
 
   // Change the value of the cell 1/2/3 when click on it and change the state
   let changeCellValue = (x, y) => {
@@ -52,10 +59,10 @@ function Nonogram() {
   //To compare de right solution with de user solution. When it´s right, the game ends
   let compareSolution = () => {
     let solutionUserWithout2 = solutionUser.grid.map(row => row.map(item => item !== 1 ? 0 : 1))
-    console.log(solutionUserWithout2)
     if (JSON.stringify(solutionGame.grid) === JSON.stringify(solutionUserWithout2)) {
-      changeWinGame(true);
-      alert("Has ganado");
+      // changeWinGame(true);
+      setModal(!modal)
+      // alert("Has ganado");
     }
   }
 
@@ -121,7 +128,7 @@ function Nonogram() {
     //We transform the initial array into a vertical one to be able to read the vertical tracks
     for (let i = 0; i < grid.length; i++) {
       for (let j = 0; j < grid.length; j++) {
-        tempVerticalGrid.push(grid[j][i])
+        tempVerticalGrid.push(grid[j][i]);
       }
       verticalGrid.push(tempVerticalGrid);
       tempVerticalGrid = [];
@@ -162,25 +169,44 @@ function Nonogram() {
   verticalCounter(solutionGame.grid);
 
   return (
-    <table className="center">
-      <tbody>
-        <tr>
-          {/*The first one goes empty*/}
-          <td></td>
-          {verticalClues.map((clue, clueIndex) => {
-            return <td key={clueIndex} className='clue v_clue'>{clue}</td>
-          })}
-        </tr>
-        {
-          solutionUser.grid.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              <td className='clue h_clue'>{horizontalClues[rowIndex]}</td>
-              {row.map((cell, cellIndex) => <td className={`cell_${cell}`} key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} >{cell}</td>)}
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+    <div className="container-fluid">
+      {modal ?
+        <div>
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>Enhorabuena!!</ModalHeader>
+            <ModalBody>
+              Has ganado el juego! ¿Quieres intentar otra partida?
+        </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={toggle}>Vamos allá</Button>{' '}
+            </ModalFooter>
+          </Modal>
+        </div>
+        :
+        <div>
+          <table className="center">
+            <tbody>
+              <tr>
+                {/*The first one goes empty*/}
+                <td></td>
+                {verticalClues.map((clue, clueIndex) => {
+                  return <td key={clueIndex} className='clue v_clue'>{clue}</td>
+                })}
+              </tr>
+              {
+                solutionUser.grid.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    <td className='clue h_clue'>{horizontalClues[rowIndex]}</td>
+                    {row.map((cell, cellIndex) => <td className={`cell_${cell}`} key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} ></td>)}
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <Button color="primary" onClick={() => window.location.reload()}>Restart!</Button>
+        </div>
+      }
+    </div>
   )
 }
 
