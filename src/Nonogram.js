@@ -103,8 +103,13 @@ function Nonogram() {
           tempClues.push(times[i][j]);
         }
       }
-      horizontalClues.push(tempClues);
-      tempClues = [];
+      if(tempClues.length !== 0) {
+        horizontalClues.push(tempClues);
+        tempClues = [];
+      } else {
+        horizontalClues.push([0]);
+        tempClues = [];
+      }
     }
     values = [];
     times = [];
@@ -159,8 +164,13 @@ function Nonogram() {
           tempClues.push(times[i][j]);
         }
       }
-      verticalClues.push(tempClues);
-      tempClues = [];
+      if(tempClues.length !== 0) {
+        verticalClues.push(tempClues);
+        tempClues = [];
+      } else {
+        verticalClues.push([0]);
+        tempClues = [];
+      }
     }
     return verticalClues;
   }
@@ -190,7 +200,7 @@ function Nonogram() {
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue prueba'>{clue}</td>
+                  return <td key={clueIndex} className='clue v_clue'><div className="prueba">{clue}</div></td>
                 })}
               </tr>
               {

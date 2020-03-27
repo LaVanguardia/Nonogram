@@ -42,14 +42,14 @@ table.center {
 .v_clue {
     letter-spacing: 4px;
     padding-left: 10px;
-    -webkit-writing-mode: vertical-lr;
-    -ms-writing-mode: tb-lr;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    -webkit-font-feature-settings: "vkrn",
-    "vpal";
-    font-feature-settings: "vkrn",
-    "vpal";
+    // -webkit-writing-mode: vertical-lr;
+    // -ms-writing-mode: tb-lr;
+    // writing-mode: vertical-lr;
+    // text-orientation: upright;
+    // -webkit-font-feature-settings: "vkrn",
+    // "vpal";
+    // font-feature-settings: "vkrn",
+    // "vpal";
 }
 
 .h_clue {
@@ -57,5 +57,8 @@ table.center {
     padding-right: 4px;
 }
 .prueba{
-    display: inline-table;
+    // display: inline-table;
+    margin: 0 auto;
+    width: 0;
+    word-wrap: break-word;
 }
