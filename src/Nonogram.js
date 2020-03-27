@@ -179,7 +179,7 @@ function Nonogram() {
   verticalCounter(solutionGame.grid);
 
   return (
-    <div className="container-fluid">
+    <div className="Nonogram container-fluid">
       {modal ?
         <div>
           <Modal isOpen={modal} toggle={toggle}>
@@ -200,7 +200,7 @@ function Nonogram() {
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue'><div className="prueba">{clue}</div></td>
+                  return <td key={clueIndex} className='clue v_clue'><div className="v-text">{clue}</div></td>
                 })}
               </tr>
               {
