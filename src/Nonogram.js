@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './Nonogram.scss';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  //Para dropdown:
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from 'reactstrap';
 
-function Nonogram() {
-
+export default function NonogramApp() {
   // ---STATES---
   const [newGame, changeNewGame] = useState({
     // We create a new grid of 5x5
@@ -42,6 +52,10 @@ function Nonogram() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   //--FIN MODAL
+  // --DROPDOWN
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
+  // --FIN DROPDOWN
 
   //We change the value of SolutionGame, making random values 0 / 1
   useEffect(() => { changeSolutionGame({ grid: solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))) }) }, []);
@@ -103,7 +117,7 @@ function Nonogram() {
           tempClues.push(times[i][j]);
         }
       }
-      if(tempClues.length !== 0) {
+      if (tempClues.length !== 0) {
         horizontalClues.push(tempClues);
         tempClues = [];
       } else {
@@ -164,7 +178,7 @@ function Nonogram() {
           tempClues.push(times[i][j]);
         }
       }
-      if(tempClues.length !== 0) {
+      if (tempClues.length !== 0) {
         verticalClues.push(tempClues);
         tempClues = [];
       } else {
@@ -188,19 +202,31 @@ function Nonogram() {
               Has ganado el juego! ¿Quieres intentar otra partida?
         </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={()=>window.location.reload()}>Vamos allá</Button>{' '}
+              <Button color="primary" onClick={() => window.location.reload()}>Vamos allá</Button>{' '}
             </ModalFooter>
           </Modal>
         </div>
         :
         <div>
           <table className="center">
+            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+              <DropdownToggle caret>
+                Selecciona nivel
+        </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Fácil 5x5</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>Medio 8x8</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem>Difícil 10x10</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
             <tbody>
               <tr>
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue'><div className="v-text">{clue}</div></td>
+                  return <td key={clueIndex} className='clue v_clue'><div><p className="v_clue_p v-text">{clue}</p></div></td>
                 })}
               </tr>
               {
@@ -213,11 +239,9 @@ function Nonogram() {
               }
             </tbody>
           </table>
-          <Button color="primary" onClick={() => window.location.reload()}>Restart!</Button>
+          <Button className="restart_button" color="primary" onClick={() => window.location.reload()}>Restart!</Button>
         </div>
       }
     </div>
   )
 }
-
-export default Nonogram;
