@@ -6,63 +6,85 @@
     // height: 100vh;
 }
 
-.btn-primary {
-    
-}
+.btn {
+    padding: .175rem .45rem !important;
+    background-color: rgb(26, 189, 206) !important;
+    border-color: rgb(26, 189, 206) !important;
+} 
 
+.btn-secondary {
+    color: #fff;
+    background-color: rgb(144, 41, 156) !important;
+    border-color: rgb(144, 41, 156) !important;
+}
 // .container-fluid {
 //     width: 100vw;
 // }
 
 table.center {
     empty-cells: hide;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
 
-    & td {
-        padding: 10px;
+    & .cell {
+        // padding: 10px;
         // text-align: center;
-        width: 60px;
-        height: 60px;
+        width: 3rem;
+        height: 3rem;
+        // border-radius: 50%;
+        
+
+        @media screen and (max-width:330px) {
+            width: 1.8rem;
+            height: 1.8rem; 
+        }
          
     }
 
     // Cases of the cells...No selected:0 /OK:1 / KO:2 
     & .cell_0 {
         background-color: rgb(236, 236, 236);
-        width: 2rem;
-        height: 2rem;
-        border: 1px solid black;
+        // width: 2rem;
+        // height: 2rem;
+        // border: 1px solid black;
     }
 
     & .cell_1 {
         background-color: rgb(86, 93, 148);
-        width: 2rem;
-        height: 2rem;
-        border: 1px solid black;
+        // width: 2rem;
+        // height: 2rem;
+        // border: 1px solid black;
     }
 
     & .cell_2 {
         background-color: red;
-        width: 2rem;
-        height: 2rem;
-        border: 1px solid black;
+        // width: 2rem;
+        // height: 2rem;
+        // border: 1px solid black;
     }
 }
 
 .clue {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-align: right;
     color: rgb(236, 236, 236);
+    
+    @media screen and (max-width:330px) {
+        font-size: 0.8rem;
+    }
 }
 
 .v_clue {
-    letter-spacing: 4px;
+    // letter-spacing: 4px;
 }
 
 .h_clue {
     letter-spacing: 8px;
     padding-right: 4px;
+
 }
 
 .modal {
@@ -76,12 +98,26 @@ table.center {
 }
 
 .restart_button  {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 5px
+}
+
+.selector_button {
+    margin: 5px
 }
 
 .v_clue_p {
     margin: auto;
     writing-mode: vertical-lr;
     text-orientation: upright;
+}
+
+.buttons {
+    display: flex;
+    margin: 0.9rem;
+    justify-content: center;
+    
+    @media screen and (max-width:330px) {
+        margin: 0.3rem;
+    }
+    
 }

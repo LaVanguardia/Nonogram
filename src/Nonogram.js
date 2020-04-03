@@ -13,18 +13,8 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-export default function NonogramApp() {
+export default function Nonogram() {
   // ---STATES---
-  const [newGame, changeNewGame] = useState({
-    // We create a new grid of 5x5
-    grid: [
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 0, 0]
-    ]
-  });
   const [solutionGame, changeSolutionGame] = useState({
     // Here will be the solution (0 and 1) generate randomly
     grid: [
@@ -45,7 +35,6 @@ export default function NonogramApp() {
       [0, 0, 0, 0, 0]
     ]
   });
-  const [winGame, changeWinGame] = useState(false);
   // ---END OF STATES---
 
   //--MODAL fin del juego
@@ -57,9 +46,18 @@ export default function NonogramApp() {
   const toggleDropdown = () => setDropdownOpen(prevState => !prevState);
   // --FIN DROPDOWN
 
+  //Change level dropdown
+  function changeLevel(item) {
+    changeSolutionUser({ grid: Array(item).fill(0).map(x => Array(item).fill(0)) });
+    changeSolutionGame({ grid: Array(item).fill(0).map(x => Array(item).fill(0).map(e=>Math.round(Math.random())))});
+  }
+
   //We change the value of SolutionGame, making random values 0 / 1
-  useEffect(() => { changeSolutionGame({ grid: solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))) }) }, []);
-  console.log(solutionGame)
+  function randomValueSolution(){
+    changeSolutionGame({ grid: solutionGame.grid.map(row => row.map(item => item = (Math.round(Math.random())))) });
+  }
+  useEffect(() => { randomValueSolution() }, []);
+  console.log(solutionGame.grid)
 
   // Change the value of the cell 1/2/3 when click on it and change the state
   let changeCellValue = (x, y) => {
@@ -76,7 +74,6 @@ export default function NonogramApp() {
     if (JSON.stringify(solutionGame.grid) === JSON.stringify(solutionUserWithout2)) {
       // changeWinGame(true);
       setModal(!modal)
-      // alert("Has ganado");
     }
   }
 
@@ -205,22 +202,8 @@ export default function NonogramApp() {
               <Button color="primary" onClick={() => window.location.reload()}>Vamos allá</Button>{' '}
             </ModalFooter>
           </Modal>
-        </div>
-        :
-        <div>
+
           <table className="center">
-            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-              <DropdownToggle caret>
-                Selecciona nivel
-        </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Fácil 5x5</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Medio 8x8</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Difícil 10x10</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
             <tbody>
               <tr>
                 {/*The first one goes empty*/}
@@ -232,14 +215,70 @@ export default function NonogramApp() {
               {
                 solutionUser.grid.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    <td className='clue h_clue'>{horizontalClues[rowIndex]}</td>
-                    {row.map((cell, cellIndex) => <td className={`cell_${cell}`} key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} ></td>)}
+                    <td ><div className='clue h_clue'>{horizontalClues[rowIndex]}</div></td>
+                    {row.map((cell, cellIndex) => <td key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} ><div className={`cell_${cell} cell`}></div></td>)}
                   </tr>
                 ))
               }
             </tbody>
           </table>
+
+          <div className="buttons">
           <Button className="restart_button" color="primary" onClick={() => window.location.reload()}>Restart!</Button>
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+              <DropdownToggle caret className="selector_button" >
+                Selecciona nivel
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => changeLevel(3)}>Aprende 3x3</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(5)}>Fácil 5x5</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(8)}>Medio 8x8</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(10)}>Difícil 10x10</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        </div>
+        :
+        <div>
+          <table className="center">
+            <tbody>
+              <tr>
+                {/*The first one goes empty*/}
+                <td></td>
+                {verticalClues.map((clue, clueIndex) => {
+                  return <td key={clueIndex} className='clue v_clue'><div><p className="v_clue_p v-text">{clue}</p></div></td>
+                })}
+              </tr>
+              {
+                solutionUser.grid.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    <td ><div className='clue h_clue'>{horizontalClues[rowIndex]}</div></td>
+                    {row.map((cell, cellIndex) => <td key={cellIndex} onClick={() => changeCellValue(rowIndex, cellIndex)} ><div className={`cell_${cell} cell`}></div></td>)}
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+          <div className="buttons">
+          <Button className="restart_button" color="primary" onClick={() => window.location.reload()}>Restart!</Button>
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+              <DropdownToggle caret className="selector_button" >
+                Selecciona nivel
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => changeLevel(3)}>Aprende 3x3</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(5)}>Fácil 5x5</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(8)}>Medio 8x8</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => changeLevel(10)}>Difícil 10x10</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </div>
         </div>
       }
     </div>
