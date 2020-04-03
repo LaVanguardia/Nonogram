@@ -209,7 +209,7 @@ export default function Nonogram() {
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue'><div><p className="v_clue_p v-text">{clue}</p></div></td>
+                  return <td key={clueIndex} className='clue v_clue' valign="bottom"><div><p className="v_clue_p v-text">{clue}</p></div></td>
                 })}
               </tr>
               {
@@ -249,7 +249,7 @@ export default function Nonogram() {
                 {/*The first one goes empty*/}
                 <td></td>
                 {verticalClues.map((clue, clueIndex) => {
-                  return <td key={clueIndex} className='clue v_clue'><div><p className="v_clue_p v-text">{clue}</p></div></td>
+                  return <td key={clueIndex} className='clue v_clue' valign="bottom"><div><p className="v_clue_p v-text">{clue}</p></div></td>
                 })}
               </tr>
               {
